@@ -9,78 +9,76 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         /* TestCase 2: URL should not be empty or blank
          */
-         it('The URL should not be empty or blank....', function() {
-           allFeeds.forEach(function(feedreader) {
-             var fed = feedreader.url;
-             expect(fed).toBeDefined();
+        it('The URL should not be empty or blank....', function() {
+            allFeeds.forEach(function(feedreader) {
+                var fed = feedreader.url;
+                expect(fed).toBeDefined();
 
-            expect(fed.length).not.toBe(0);
-
-         });
-         });
-        /* TestCase 3: Name of URL should not be empty or blank
-         */
-         it('The name of URL should not be empty or blank ...', function() {
-           allFeeds.forEach(function(feedreader) {
-             var fed = feedreader.name;
-            expect(fed.length).not.toBe(0);
-            expect(fed).toBeDefined();
-
-         });
-         });
-    });//End feed
-
-        /* TestCase 4: The menu should be hidden by default
-         */
-    describe('The menu', function() {
-      it('The menu item should  be hidden  ...', function() {
-       var bodyConnten = $("body");
-       var menu = $(".menu-icon-link");
-         expect(bodyConnten.hasClass("menu-hidden")).toBe(true);
-
-      });
-      /* TestCase 5: The menu should display when
-      clicked and does it hide when clicked again.
-      */
-          it('The menu icon is clicked ...', function() {
-           var bodyConnten = $("body");
-           var menu = $(".menu-icon-link");
-           menu.trigger("click");
-           expect(bodyConnten.hasClass("menu-hidden")).not.toBe(true);
-           menu.trigger("click");
-           expect(bodyConnten.hasClass("menu-hidden")).toBe(true);
-
-
-          });
-
-
-
-                  });//End menu
-
-        /* TestCase 6: Initial Entries should be created
-                  */
-
-         describe('Initial Entries should be created ...', function() {
-           it('Ensures when the loadFeed is completed and loaded  ...', function() {
-              beforEach(function(done){
-          var  InitialFeed=  loadFeed(0 , done);
-              });
+                expect(fed.length).not.toBe(0);
 
             });
+        });
+        /* TestCase 3: Name of URL should not be empty or blank
+         */
+        it('The name of URL should not be empty or blank ...', function() {
+            allFeeds.forEach(function(feedreader) {
+                var fed = feedreader.name;
+                expect(fed.length).not.toBe(0);
+                expect(fed).toBeDefined();
 
+            });
+        });
+    }); //End feed
+
+    /* TestCase 4: The menu should be hidden by default
+     */
+    describe('The menu', function() {
+        it('The menu item should  be hidden  ...', function() {
+            var bodyConnten = $("body");
+            var menu = $(".menu-icon-link");
+            expect(bodyConnten.hasClass("menu-hidden")).toBe(true);
+
+        });
+        /* TestCase 5: The menu should display when clicked and does it hide when clicked again.
+        */
+        it('The menu icon is clicked ...', function() {
+            var bodyConnten = $("body");
+            var menu = $(".menu-icon-link");
+            menu.trigger("click");
+            expect(bodyConnten.hasClass("menu-hidden")).toBe(false);
+            menu.trigger("click");
+            expect(bodyConnten.hasClass("menu-hidden")).toBe(true);
+
+        });
+
+    }); //End menu
+
+    /* TestCase 6: Initial Entries should be created
+     */
+
+    describe('Initial Entries should be created ...', function() {
+        it('Initial Entries should be created ...', function() {
+            beforEach(function(done) {
+                loadFeed(0, done);
+                var InitialFeed = $('.feed').html();
+            });
+
+        });
+
+    }); //Entries
 
     /* TestCase 7: Ensures when a new feed is loaded
-         */
+     */
+    describe('Ensures when the loadFeed is completed and loaded  ...', function() {
+        it('Initial Entries should be created ...', function() {
             loadFeed(1, function() {
                 var Afterloaded = $('.feed').html();
                 expect(InitialFeed).not.toBe(Afterloaded);
                 done();
             });
-
-
-        });//Entries
+        });
+    }); //Entries
 
 }());
