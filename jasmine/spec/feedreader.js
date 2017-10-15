@@ -55,30 +55,29 @@ $(function() {
 
     }); //End menu
 
-    /* TestCase 6: Initial Entries should be created
+    /* TestCase 6: Initial Entries should be created and loaded
      */
 
-    describe('Initial Entries should be created ...', function() {
-        it('Initial Entries should be created ...', function() {
-            beforEach(function(done) {
-                loadFeed(0, done);
-                var InitialFeed = $('.feed').html();
-            });
+describe('Ensures when the loadFeed is completed and loaded  ...', function() {
+var Afterloaded;
+var InitialFeed;
+        loadFeed(0, function() {
+            var InitialFeed = $('.feed').html();
+            done();
+        });
+        loadFeed(1, function() {
+            var Afterloaded = $('.feed').html();
+            done();
+        });
+        it('Initial Entries should be created and loaded...', function() {
+                expect(InitialFeed).toBe(Afterloaded);
 
         });
+}); //Entries
 
-    }); //Entries
 
-    /* TestCase 7: Ensures when a new feed is loaded
-     */
-    describe('Ensures when the loadFeed is completed and loaded  ...', function() {
-        it('Initial Entries should be created ...', function() {
-            loadFeed(1, function() {
-                var Afterloaded = $('.feed').html();
-                expect(InitialFeed).not.toBe(Afterloaded);
-                done();
-            });
-        });
-    }); //Entries
+//end
+
+
 
 }());
