@@ -61,16 +61,21 @@ $(function() {
 describe('Ensures when the loadFeed is completed and loaded  ...', function() {
 var Afterloaded;
 var InitialFeed;
-        loadFeed(0, function() {
-            var InitialFeed = $('.feed').html();
+
+
+beforeEach(function (done){
+        loadFeed(0, function(feed1) {
+        InitialFeed = $('.feed').html();
+        loadFeed(1, function(feed2) {
+        Afterloaded = $('.feed').html();
             done();
         });
-        loadFeed(1, function() {
-            var Afterloaded = $('.feed').html();
-            done();
-        });
+  });
+      });
         it('Initial Entries should be created and loaded...', function() {
-                expect(InitialFeed).toBe(Afterloaded);
+                expect(InitialFeed).not.toEqual(Afterloaded);
+ // console.log("InitialFeed--"+InitialFeed);
+ // console.log("Afterloaded--"+Afterloaded);
 
         });
 }); //Entries
